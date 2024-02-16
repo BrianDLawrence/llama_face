@@ -4,7 +4,7 @@ const NavBar = () => {
             <div className="flex-1">
                 <a className="btn btn-ghost text-xl">Llama Herder</a>
             </div>
-            <div className="flex-none gap-2">
+            {/*<div className="flex-none gap-2">
                 <div className="form-control">
                     <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
                 </div>
@@ -25,7 +25,7 @@ const NavBar = () => {
                         <li><a>Logout</a></li>
                     </ul>
                 </div>
-            </div>
+            </div>*/}
         </div>
     );
 };
