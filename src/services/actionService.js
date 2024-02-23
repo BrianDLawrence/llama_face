@@ -1,7 +1,7 @@
-// src/services/actionService.js
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+console.log(process.env)
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getActions = async () => {
     try {
@@ -23,7 +23,6 @@ export const postAction = async (action) => {
     }
 };
 
-// Modify an existing action
 export const putAction = async (id, action) => {
     try {
         const response = await axios.put(`${API_BASE_URL}/actions/${id}`, action);
@@ -34,18 +33,16 @@ export const putAction = async (id, action) => {
     }
 };
 
-// Remove an action
 export const deleteAction = async (id) => {
     try {
         const response = await axios.delete(`${API_BASE_URL}/actions/${id}`);
-        return response.data; // This might not always return data; depends on API implementation.
+        return response.data;
     } catch (error) {
         console.error(`Failed to delete action with id ${id}:`, error);
         throw error;
     }
 };
 
-// Send Action -> Invoke the Llama Herder
 export const sendAction = async (id) => {
     try {
         const response = await axios.post(`${API_BASE_URL}/send/${id}`);

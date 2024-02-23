@@ -1,4 +1,3 @@
-// src/pages/Homepage/Homepage.jsx
 import React from 'react';
 import ActionList from '../components/ActionList';
 

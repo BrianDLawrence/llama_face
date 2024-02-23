@@ -4,8 +4,9 @@ import { getActions, postAction, putAction, deleteAction, sendAction } from '../
 const ActionList = () => {
   const [actions, setActions] = useState([]);
   const [newActionName, setNewActionName] = useState('');
+  const [newSuccessCriteria, setNewSuccessCriteria] = useState('');
   const [newPrompt, setNewPrompt] = useState('');
-  const [editStates, setEditStates] = useState({}); // Tracks edits to existing actions
+  const [editStates, setEditStates] = useState({});
 
   useEffect(() => {
     fetchActions();
@@ -17,7 +18,7 @@ const ActionList = () => {
       setActions(fetchedActions);
       // Initialize edit state for each fetched action
       const initialEditStates = fetchedActions.reduce((acc, action) => {
-        acc[action.id] = { name: action.name, prompt: action.prompt };
+        acc[action.id] = { name: action.name, success_criteria: action.success_criteria, prompt: action.prompt };
         return acc;
       }, {});
       setEditStates(initialEditStates);
@@ -28,9 +29,10 @@ const ActionList = () => {
 
   const handleAddAction = async () => {
     try {
-      const newAction = { name: newActionName, prompt: newPrompt };
+      const newAction = { name: newActionName, success_criteria: newSuccessCriteria, prompt: newPrompt };
       await postAction(newAction);
       setNewActionName('');
+      setNewSuccessCriteria('');
       setNewPrompt('');
       await fetchActions(); // Refresh the list of actions
     } catch (error) {
@@ -40,7 +42,7 @@ const ActionList = () => {
 
   const handleUpdateAction = async (id) => {
     try {
-      const actionToUpdate = { name: editStates[id].name, prompt: editStates[id].prompt };
+      const actionToUpdate = { name: editStates[id].name, success_criteria: editStates[id].success_criteria, prompt: editStates[id].prompt };
       await putAction(id, actionToUpdate);
       await fetchActions(); // Refresh the list of actions
     } catch (error) {
@@ -87,6 +89,13 @@ const ActionList = () => {
         />
         <input
           type="text"
+          placeholder="Success Criteria"
+          value={newSuccessCriteria}
+          onChange={(e) => setNewSuccessCriteria(e.target.value)}
+          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+        />
+        <input
+          type="text"
           placeholder="Prompt"
           value={newPrompt}
           onChange={(e) => setNewPrompt(e.target.value)}
@@ -107,6 +116,12 @@ const ActionList = () => {
                 type="text"
                 value={editStates[action.id]?.name || ''}
                 onChange={(e) => handleFieldChange(action.id, 'name', e.target.value)}
+                className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
+              />
+              <input
+                type="text"
+                value={editStates[action.id]?.success_criteria || ''}
+                onChange={(e) => handleFieldChange(action.id, 'success_criteria', e.target.value)}
                 className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
               />
               <input
