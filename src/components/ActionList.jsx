@@ -7,6 +7,7 @@ const ActionList = () => {
   const [newSuccessCriteria, setNewSuccessCriteria] = useState('');
   const [newPrompt, setNewPrompt] = useState('');
   const [editStates, setEditStates] = useState({});
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   useEffect(() => {
     fetchActions();
@@ -53,6 +54,11 @@ const ActionList = () => {
   const handleSendAction = async (id) => {
     try {
       await sendAction(id);
+      setIsDialogOpen(true); // Show the dialog
+      setTimeout(() => {
+        setIsDialogOpen(false); // Hide the dialog
+        window.location.reload(); // Refresh the page after the dialog is hidden
+      }, 3000);
     } catch (error) {
       console.error(`Error sending action with id ${id}:`, error);
     }
@@ -78,8 +84,8 @@ const ActionList = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto">
-      <div className="mb-4">
+    <div>
+      <div className="container mx-auto px-2 py-2">
         <input
           type="text"
           placeholder="Action Name"
@@ -108,52 +114,64 @@ const ActionList = () => {
           Add New Action
         </button>
       </div>
-      <ul className="divide-y divide-gray-200">
+      <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-5">
         {actions.map((action) => (
-          <li key={action.id} className="py-4 flex justify-between items-center">
-            <div>
-              <input
-                type="text"
-                value={editStates[action.id]?.name || ''}
-                onChange={(e) => handleFieldChange(action.id, 'name', e.target.value)}
-                className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
-              />
-              <input
-                type="text"
-                value={editStates[action.id]?.success_criteria || ''}
-                onChange={(e) => handleFieldChange(action.id, 'success_criteria', e.target.value)}
-                className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
-              />
-              <input
-                type="text"
-                value={editStates[action.id]?.prompt || ''}
-                onChange={(e) => handleFieldChange(action.id, 'prompt', e.target.value)}
-                className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300"
-              />
+          <div class="card w-128 bg-base-100 shadow-xl card-bordered">
+            <div class="card-body">
+              <h2 class="card-title">{editStates[action.id]?.name || ''}</h2>
+              <div>
+                <input
+                  type="text"
+                  value={editStates[action.id]?.name || ''}
+                  onChange={(e) => handleFieldChange(action.id, 'name', e.target.value)}
+                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
+                />
+                <input
+                  type="text"
+                  value={editStates[action.id]?.success_criteria || ''}
+                  onChange={(e) => handleFieldChange(action.id, 'success_criteria', e.target.value)}
+                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
+                />
+                <input
+                  type="text"
+                  value={editStates[action.id]?.prompt || ''}
+                  onChange={(e) => handleFieldChange(action.id, 'prompt', e.target.value)}
+                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300"
+                />
+              </div>
+              <div class="card-actions justify-end text-xs">
+                <div className="py-4 flex flex-row">
+                  <button
+                    onClick={() => handleSendAction(action.id)}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Send
+                  </button>
+                  <button
+                    onClick={() => handleUpdateAction(action.id)}
+                    className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Update
+                  </button>
+                  <button
+                    onClick={() => handleDeleteAction(action.id)}
+                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="py-4 flex flex-row">
-              <button
-                onClick={() => handleSendAction(action.id)}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Send
-              </button>
-              <button
-                onClick={() => handleUpdateAction(action.id)}
-                className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Update
-              </button>
-              <button
-                onClick={() => handleDeleteAction(action.id)}
-                className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
-              >
-                Delete
-              </button>
-            </div>
-          </li>
+          </div>
         ))}
-      </ul>
+
+      </div>
+      {isDialogOpen && (
+        <div role="alert" class="alert alert-success">
+          <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+          <span>Message Sent!</span>
+        </div>
+      )}
     </div>
   );
 };

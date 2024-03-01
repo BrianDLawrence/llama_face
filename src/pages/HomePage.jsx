@@ -1,5 +1,6 @@
 import React from 'react';
 import ActionList from '../components/ActionList';
+import UnansweredMessages from '../components/UnansweredMessages';
 
 const Homepage = () => {
     return (
@@ -8,6 +9,7 @@ const Homepage = () => {
                 Action and Prompts Editor
             </h1>
             <ActionList />
+            <UnansweredMessages />
         </div>
     );
 };

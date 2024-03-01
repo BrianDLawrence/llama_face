@@ -52,3 +52,14 @@ export const sendAction = async (id) => {
         throw error;
     }
 };
+
+export const getAmountUnansweredMessages = async () => {
+    try {
+        const response = await axios.get(`${API_BASE_URL}/get_amount_unanswered_messages`);
+        return response.data;
+    } catch (error) {
+        console.error('Failed to fetch amount of unanswered messages:', error);
+        throw error;
+    }
+};
+
