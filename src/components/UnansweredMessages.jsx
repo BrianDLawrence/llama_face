@@ -8,8 +8,7 @@ const UnansweredMessages = () => {
         const fetchUnansweredMessages = async () => {
             try {
                 const response = await getAmountUnansweredMessages();
-                // Assuming the API response structure is { amount: <number> }
-                setUnansweredMessages(response.amount); // Extract and use the `amount` value
+                setUnansweredMessages(response.amount);
             } catch (error) {
                 console.error('Error fetching unanswered messages:', error);
             }
@@ -20,10 +19,11 @@ const UnansweredMessages = () => {
     }, []);
 
     return (
-        <div className="flex justify-center items-center h-32 bg-blue-100 rounded-lg shadow-md m-4">
+        <div className="flex justify-center items-center h-32 bg-info rounded-lg shadow-md m-4">
             <div className="text-center">
-                <p className="text-2xl font-semibold text-blue-800">Unanswered Messages</p>
-                <p className="text-6xl font-bold text-blue-600">{unansweredMessages}</p>
+                <p className="text-2xl font-semibold text-info-content">Unanswered Messages</p>
+                <p className="text-6xl font-bold text-primary-content">{unansweredMessages}</p>
+                <p className="text-6xl font-bold text-primary-content">{unansweredMessages}</p>
             </div>
         </div>
     );

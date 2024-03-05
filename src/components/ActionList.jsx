@@ -91,26 +91,27 @@ const ActionList = () => {
           placeholder="Action Name"
           value={newActionName}
           onChange={(e) => setNewActionName(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
         />
         <input
           type="text"
           placeholder="Success Criteria"
           value={newSuccessCriteria}
           onChange={(e) => setNewSuccessCriteria(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
         />
         <input
           type="text"
           placeholder="Prompt"
           value={newPrompt}
           onChange={(e) => setNewPrompt(e.target.value)}
-          className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+          className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
         />
         <button
           onClick={handleAddAction}
-          className="mt-2 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+          className="mt-2 bg-primary hover:brightness-110 text-primary-content font-bold py-2 px-4 rounded"
         >
+
           Add New Action
         </button>
       </div>
@@ -124,38 +125,38 @@ const ActionList = () => {
                   type="text"
                   value={editStates[action.id]?.name || ''}
                   onChange={(e) => handleFieldChange(action.id, 'name', e.target.value)}
-                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
+                  className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300 mb-2"
                 />
                 <input
                   type="text"
                   value={editStates[action.id]?.success_criteria || ''}
                   onChange={(e) => handleFieldChange(action.id, 'success_criteria', e.target.value)}
-                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300 mb-2"
+                  className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300 mb-2"
                 />
                 <input
                   type="text"
                   value={editStates[action.id]?.prompt || ''}
                   onChange={(e) => handleFieldChange(action.id, 'prompt', e.target.value)}
-                  className="text-lg font-semibold rounded-md border-gray-300 shadow-sm focus:border-indigo-300"
+                  className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300"
                 />
               </div>
               <div class="card-actions justify-end text-xs">
                 <div className="py-4 flex flex-row">
                   <button
                     onClick={() => handleSendAction(action.id)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                    className="bg-secondary hover:brightness-125 text-secondary-content font-bold py-1 px-2 rounded"
                   >
                     Send
                   </button>
                   <button
                     onClick={() => handleUpdateAction(action.id)}
-                    className="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
+                    className="ml-2 bg-secondary hover:brightness-125 text-secondary-content font-bold py-1 px-2 rounded"
                   >
                     Update
                   </button>
                   <button
                     onClick={() => handleDeleteAction(action.id)}
-                    className="ml-2 bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded"
+                    className="ml-2 bg-accent hover:brightness-110 text-accent-content font-bold py-1 px-2 rounded"
                   >
                     Delete
                   </button>
