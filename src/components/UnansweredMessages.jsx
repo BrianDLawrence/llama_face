@@ -23,7 +23,6 @@ const UnansweredMessages = () => {
             <div className="text-center">
                 <p className="text-2xl font-semibold text-info-content">Unanswered Messages</p>
                 <p className="text-6xl font-bold text-primary-content">{unansweredMessages}</p>
-                <p className="text-6xl font-bold text-primary-content">{unansweredMessages}</p>
             </div>
         </div>
     );
