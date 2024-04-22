@@ -92,6 +92,7 @@ const ActionList = () => {
           value={newActionName}
           onChange={(e) => setNewActionName(e.target.value)}
           className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
+          id="actionName"
         />
         <input
           type="text"
@@ -99,6 +100,7 @@ const ActionList = () => {
           value={newSuccessCriteria}
           onChange={(e) => setNewSuccessCriteria(e.target.value)}
           className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
+          id="actionSuccess"
         />
         <input
           type="text"
@@ -106,6 +108,7 @@ const ActionList = () => {
           value={newPrompt}
           onChange={(e) => setNewPrompt(e.target.value)}
           className="mt-1 block w-full rounded-md border-base-300 shadow-sm"
+          id="actionPrompt"
         />
         <button
           onClick={handleAddAction}
@@ -115,32 +118,35 @@ const ActionList = () => {
           Add New Action
         </button>
       </div>
-      <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-5">
+      <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 gap-5">
         {actions.map((action) => (
-          <div class="card w-128 bg-base-100 shadow-xl card-bordered">
-            <div class="card-body">
-              <h2 class="card-title">{editStates[action.id]?.name || ''}</h2>
+          <div className="card w-128 bg-base-100 shadow-xl card-bordered" key={action.id}>
+            <div className="card-body">
+              <h2 className="card-title">{editStates[action.id]?.name || ''}</h2>
               <div>
                 <input
                   type="text"
                   value={editStates[action.id]?.name || ''}
                   onChange={(e) => handleFieldChange(action.id, 'name', e.target.value)}
                   className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300 mb-2"
+                  id={'actionnamewithid'+action.id}
                 />
                 <input
                   type="text"
                   value={editStates[action.id]?.success_criteria || ''}
                   onChange={(e) => handleFieldChange(action.id, 'success_criteria', e.target.value)}
                   className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300 mb-2"
+                  id={'actionsuccesswithid'+action.id}
                 />
                 <input
                   type="text"
                   value={editStates[action.id]?.prompt || ''}
                   onChange={(e) => handleFieldChange(action.id, 'prompt', e.target.value)}
                   className="text-lg font-semibold rounded-md border-base-300 shadow-sm focus:border-indigo-300"
+                  id={'actionpromptwithid'+action.id}
                 />
               </div>
-              <div class="card-actions justify-end text-xs">
+              <div className="card-actions justify-end text-xs">
                 <div className="py-4 flex flex-row">
                   <button
                     onClick={() => handleSendAction(action.id)}

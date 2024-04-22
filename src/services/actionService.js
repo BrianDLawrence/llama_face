@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-console.log(process.env)
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 export const getActions = async () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import ActionList from '../components/ActionList';
 import UnansweredMessages from '../components/UnansweredMessages';
+import ContextList from '../components/ContextList';
 
 const Homepage = () => {
     return (
@@ -10,6 +11,7 @@ const Homepage = () => {
             </h1>
             <ActionList />
             <UnansweredMessages />
+            <ContextList />
         </div>
     );
 };
