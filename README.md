@@ -3,7 +3,8 @@
 React Frontend using [Tailwindcss](https://tailwindcss.com/) and [DaisyUI](https://daisyui.com/)
 
 ## High Level Architecture Diagram
-![Llama Design](LlamaHerder.png)
+
+![Llama Design](public/images/LlamaHerder.png)
 
 ## License
 
@@ -28,4 +29,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
