@@ -12,12 +12,12 @@ export const getAllContext = async () => {
   }
 };
 
-export const createContext = async (id, context) => {
+export const createContext = async (context) => {
   try {
-    const response = await axios.post(`${API_BASE_URL}/context/${id}`, context);
+    const response = await axios.post(`${API_BASE_URL}/context`, context);
     return response.data;
   } catch (error) {
-    console.error(`Failed to create context with id: ${id}:`, error);
+    console.error(`Failed to create context`, error);
     throw error;
   }
 };
